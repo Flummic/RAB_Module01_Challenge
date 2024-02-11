@@ -58,9 +58,6 @@ namespace Module01_Challenge
                 // Step 6: Increment the current elevation by the floor height value
                 currentElevation += floorHeight;
 
-
-
-
                 // Step 9: If the number is divisible by 3, create a sheet and name it "FIZZBUZZ_#" (# = current number)
                 if (i % 3 == 0 && i % 5 == 0)
                 {
