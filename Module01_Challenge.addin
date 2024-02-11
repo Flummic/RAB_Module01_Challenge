@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Module01_Challenge - Command 1</Text>
+    <Description>Some description for Module01_Challenge</Description>
+    <Assembly>Module01_Challenge.dll</Assembly>
+    <FullClassName>Module01_Challenge.Command1</FullClassName>
+    <ClientId>0f9b290b-720d-466a-b190-fdf5fd4d6bbb</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Text>Module01_Challenge - Command 2</Text>
+    <Description>Some description for Module01_Challenge</Description>
+    <Assembly>Module01_Challenge.dll</Assembly>
+    <FullClassName>Module01_Challenge.Command2</FullClassName>
+    <ClientId>c81e3511-d0de-4d5a-ab15-6cce1ea06a9a</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+	<Text>Module01_Challenge - Module01Challenge</Text>
+	<Description>Some description for Module01_Challenge</Description>
+	<Assembly>Module01_Challenge.dll</Assembly>
+	<FullClassName>Module01_Challenge.Module01Challenge</FullClassName>
+	<ClientId>D3EA9A29-110E-499E-AD09-25F8F33F5120</ClientId>
+	<VendorId>com.MiKluge</VendorId>
+	<VendorDescription>MiKluge, YOUR COMPANY URL</VendorDescription>
+  </AddIn>	
+  <AddIn Type="Application">
+    <Name>Module01_Challenge</Name>
+    <Assembly>Module01_Challenge.dll</Assembly>
+    <FullClassName>Module01_Challenge.App</FullClassName>
+    <ClientId>4dbc4606-b10e-431a-ba53-73cb5122cf4d</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+</RevitAddIns>
