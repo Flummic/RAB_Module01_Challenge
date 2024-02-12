@@ -42,18 +42,16 @@ namespace Module01_Challenge
             int numberOfBuzz = 0;
             int numberOfFizzBuzz = 0;
 
+            //Transaction start here
+            Transaction FizzBuzz = new Transaction(doc);
+            FizzBuzz.Start("FizzBuzz");
+
             // Step 4: Loop through 1 to the number1-variable
             for (int i = 1; i <= number1; i++)
             {
                 // Step 5: Create a level for each number
-                Transaction NewLevel = new Transaction(doc);
-                NewLevel.Start("New Level");
-
                 Level newLevel = Level.Create(doc, currentElevation);
                 newLevel.Name = "Level" + " " + i.ToString();
-
-                NewLevel.Commit();
-                NewLevel.Dispose();
 
                 // Step 6: Increment the current elevation by the floor height value
                 currentElevation += floorHeight;
@@ -69,11 +67,8 @@ namespace Module01_Challenge
 
                     // Get an available title block from document
                     FilteredElementCollector collectorTitleBlocks = new FilteredElementCollector(doc);
-                    collectorTitleBlocks.OfClass(typeof(FamilySymbol));
+                    collectorTitleBlocks.OfClass(typeof(FamilySymbol)); // Type-Filter
                     collectorTitleBlocks.OfCategory(BuiltInCategory.OST_TitleBlocks);
-
-                    Transaction NewSheet = new Transaction(doc);
-                    NewSheet.Start("New Sheet and Floor Plan");
 
                     // create a sheet and name it
                     ViewSheet newSheet = ViewSheet.Create(doc, collectorTitleBlocks.FirstElementId());
@@ -103,8 +98,6 @@ namespace Module01_Challenge
                     XYZ insertionPoint = new XYZ(1, 0.5, 0);
                     Viewport newViewport = Viewport.Create(doc, newSheet.Id, newFloorPlan.Id, insertionPoint);
 
-                    NewSheet.Commit();
-                    NewSheet.Dispose();
                     numberOfFizzBuzz++;
                     
                 }
@@ -112,8 +105,6 @@ namespace Module01_Challenge
                 // Step 7: If the number is divisible by 3, create a floor plan and name it "FIZZ_#" (# = current number)
                 else if (i % 3 == 0)
                 {
-                    Transaction NewFloor = new Transaction(doc);
-                    NewFloor.Start("New Floor Plan");
 
                     // find an available floor plan view family type
                     FilteredElementCollector collectorFloorPlanVFT = new FilteredElementCollector(doc);
@@ -133,18 +124,12 @@ namespace Module01_Challenge
                     ViewPlan newFloorPlan = ViewPlan.Create(doc, floorPlanVFT.Id, newLevel.Id);
                     newFloorPlan.Name = "FIZZ_" + i.ToString();
 
-
-                    NewFloor.Commit();
-                    NewFloor.Dispose();
                     numberOfFizz++;
                 }
 
                 // Step 8: If the number is divisible by 5, create a ceiling plan and name it "BUZZ#" (# = current number)
                 else if (i % 5 == 0)
                 {
-                    Transaction NewCeiling = new Transaction(doc);
-                    NewCeiling.Start("New Ceiling Plan");
-
                     // find an available ceiling plan view family type
                     FilteredElementCollector collectorCeilingPlanVFT = new FilteredElementCollector(doc);
                     collectorCeilingPlanVFT.OfClass(typeof(ViewFamilyType));
@@ -163,17 +148,18 @@ namespace Module01_Challenge
                     ViewPlan newCeilingPlan = ViewPlan.Create(doc, ceilingPlanVFT.Id, newLevel.Id);
                     newCeilingPlan.Name = "BUZZ_" + i.ToString();
 
-                    NewCeiling.Commit();
-                    NewCeiling.Dispose();
                     numberOfBuzz++;
                 }
 
             }
+            // Transaction end here
+            FizzBuzz.Commit();
+            FizzBuzz.Dispose();
 
             // Alert user that the Addin is finished
             TaskDialog.Show("FizzBuzz-Addin", "The Addin was successfully executed!");
             // Give the user an Alert showing how many elements of which type were created
-            TaskDialog.Show($"FizzBuzz-Addin-Counter", "created " + numberOfFizzBuzz.ToString() + " FIZZBUZZ-views; " + "created " + numberOfFizz.ToString() + " FIZZ-views; " + "created " + numberOfBuzz.ToString() + " BUZZ-views");
+            TaskDialog.Show($"FizzBuzz-Addin-Counter", "created " + numberOfFizzBuzz.ToString() + " FIZZBUZZ-views;\r\n" + "created " + numberOfFizz.ToString() + " FIZZ-views;\r\n" + "created " + numberOfBuzz.ToString() + " BUZZ-views;");
 
             return Result.Succeeded;
         }
